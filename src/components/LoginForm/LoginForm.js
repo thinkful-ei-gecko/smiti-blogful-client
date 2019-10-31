@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TokenService from '../../services/token-service'
 import { Button, Input } from '../Utils/Utils'
 
 export default class LoginForm extends Component {
@@ -11,9 +12,11 @@ export default class LoginForm extends Component {
   handleSubmitBasicAuth = ev => {
     ev.preventDefault()
     const { user_name, password } = ev.target
+    TokenService.saveAuthToken(
+        TokenService.makeBasicAuthToken(user_name.value, password.value)
+    )
 
-    console.log('login form submitted')
-    console.log({ user_name, password })
+   
 
     user_name.value = ''
     password.value = ''
